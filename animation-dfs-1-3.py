@@ -175,7 +175,7 @@ class MazeAnimation:
         self.rows = len(maze)
         self.cols = len(maze[0])
         self.robot_position = None
-        self.speed = 0.1
+        self.speed = 0.5
         self.shortest_path = []
 
         self.window = tk.Tk()
@@ -217,7 +217,7 @@ class MazeAnimation:
         
         self.window.update()
 
-filename = "mazefiles-master/classic/13ye.txt"
+filename = "mazefiles-master/classic/50.txt"
 maze, start, goal = read_maze_from_file(filename)
 
 animation = MazeAnimation(maze)
