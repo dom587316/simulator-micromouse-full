@@ -175,7 +175,7 @@ class MazeAnimation:
         self.rows = len(maze)
         self.cols = len(maze[0])
         self.robot_position = None
-        self.speed = 0.5
+        self.speed = 0.1
         self.shortest_path = []
 
         self.window = tk.Tk()

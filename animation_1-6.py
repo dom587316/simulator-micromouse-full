@@ -73,7 +73,6 @@ def bfs_micromouse(maze, start, goal, animation):
         maze[x][y].visible = True
         animation.robot_position = (x, y)
         animation.update_display()
-        time.sleep(animation.speed)
         
         if (x, y) in goal:
             break
@@ -105,19 +104,13 @@ class MazeAnimation:
         self.rows = len(maze)
         self.cols = len(maze[0])
         self.robot_position = None
-        self.speed = 0.5
 
         self.window = tk.Tk()
         self.window.title("Micromouse BFS - Dark Mode")
         self.canvas = tk.Canvas(self.window, width=self.cols * self.cell_size, height=self.rows * self.cell_size, bg="black")
         self.canvas.pack()
-        
-        self.speed_scale = tk.Scale(self.window, from_=0.01, to=0.5, resolution=0.01, orient=tk.HORIZONTAL, label="Speed")
-        self.speed_scale.set(self.speed)
-        self.speed_scale.pack()
-    
+
     def update_display(self):
-        self.speed = self.speed_scale.get()
         self.canvas.delete("all")
         for r in range(self.rows):
             for c in range(self.cols):
@@ -143,10 +136,17 @@ class MazeAnimation:
             self.canvas.create_oval(cx - 5, cy - 5, cx + 5, cy + 5, fill="yellow")
         
         self.window.update()
+        time.sleep(0.1)
 
-filename = "mazefiles-master/classic/makerthon2024.txt"
+filename = "G:/CODE/BEST_PROJECT_2024/python-bfs-simulator/mazefiles-master/classic/13ye.txt"
 maze, start, goal = read_maze_from_file(filename)
 
 animation = MazeAnimation(maze)
-bfs_micromouse(maze, start, goal, animation)
+shortest_path = bfs_micromouse(maze, start, goal, animation)
+
+if shortest_path:
+    print("✅ Đường đi đã tìm thấy!")
+else:
+    print("❌ Không tìm thấy đường đi!")
+
 animation.window.mainloop()
